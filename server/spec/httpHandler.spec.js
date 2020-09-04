@@ -9,13 +9,16 @@ const httpHandler = require('../js/httpHandler');
 
 
 describe('server responses', () => {
-
+  // mock is just '/' actual will be a url
   it('should respond to a OPTIONS request', (done) => {
     let {req, res} = server.mock('/', 'OPTIONS');
 
     httpHandler.router(req, res);
+    //successCode!
     expect(res._responseCode).to.equal(200);
+    //completed?
     expect(res._ended).to.equal(true);
+
     expect(res._data.toString()).to.be.empty;
 
     done();
@@ -23,6 +26,13 @@ describe('server responses', () => {
 
   it('should respond to a GET request for a swim command', (done) => {
     // write your test here
+    let {req, res} = server.mock('/', 'GET');
+
+    httpHandler.router(req, res);
+    expect(res._responseCode).to.equal(200);
+    expect(res._ended).to.equal(true);
+    //currently failing at line 35, expectation is to pass after writing functionality
+    expect(res._data.toString()).not.to.be.empty;
     done();
   });
 
