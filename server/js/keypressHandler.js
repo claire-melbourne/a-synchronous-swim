@@ -10,10 +10,10 @@ const mappedChars = { space: ' ' }; // special mappings
 
 //create function which selects a random number from length of valid messages
 //this should probably be inside of router instead of here in utility
-const randomMove = () => {
-  const index = Math.random() * validMessages.length;
-  return validMessages[index];
-}
+// const randomMove = () => {
+//   const index = Math.random() * validMessages.length;
+//   return validMessages[index];
+// }
 
 //checks that valid is within valid message list
 const isValidMessage = (message) => {
