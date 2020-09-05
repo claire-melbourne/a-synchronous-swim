@@ -10,6 +10,8 @@ module.exports.backgroundImageFile = path.join('.', 'background.jpg');
 let messageQueue = null;
 module.exports.initialize = (queue) => {
   messageQueue = queue;
+  // add randomMove generator here to go into queue
+  // when get request is made, send first move back to client side
 };
 //parameters: req(request) has method and url properties
 //greet all the requests, send it to different places
@@ -37,8 +39,8 @@ module.exports.router = (req, res, next = ()=>{}) => {
     const validMessages = ['left', 'right', 'up', 'down'];
     let index = Math.floor(Math.random() * validMessages.length);
     let message = validMessages[index];
-    const hi = 'hello'
-    res.writeHead(200, {'Content-Type': 'text/html'});
+    // const hi = 'hello'
+    res.writeHead(200, headers);
     res.end(message);
   }
   //send the random move along
