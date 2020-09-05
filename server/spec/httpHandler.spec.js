@@ -28,7 +28,7 @@ describe('server responses', () => {
     // write your test here
     let {req, res} = server.mock('/', 'GET');
 
-    httpHandler.router(req, res);
+    httpHandler.router(req, res, randomMove());
     expect(res._responseCode).to.equal(200);
     expect(res._ended).to.equal(true);
     //currently failing at line 35, expectation is to pass after writing functionality

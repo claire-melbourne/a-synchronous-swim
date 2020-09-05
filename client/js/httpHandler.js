@@ -1,4 +1,7 @@
-(function() {
+//const fs = require('fs');
+const SwimTeam = require('./SwimTeam.js');
+
+(function(SwimTeam) {
 
   const serverUrl = 'http://127.0.0.1:3000';
 
@@ -17,7 +20,7 @@
     $.ajax({
       type: 'POST',
       data: formData,
-      url: 'FILL_ME_IN',
+      url: `http://127.0.0.1:3000`,
       cache: false,
       contentType: false,
       processData: false,
@@ -45,5 +48,18 @@
 
     ajaxFileUplaod(file);
   });
+  //this function should trigger another call upon success
+  //added setTimeout to call every 2 seconds after initialization
+  const ajaxGetRandomMove = () => {
+    $.ajax({
+      type: 'GET',
+      data: 'text',
+      url: `http://127.0.0.1:3000`,
+      success: (data) =>{
+        SwimTeam.move(data);
+        setTimeout(ajaxGetRandomMove, 2000);
+      }
+    });
+  }
 
-})();
+})(SwimTeam);

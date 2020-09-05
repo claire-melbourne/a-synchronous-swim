@@ -8,6 +8,14 @@ const keypress = require('keypress');
 const validMessages = ['left', 'right', 'up', 'down'];
 const mappedChars = { space: ' ' }; // special mappings
 
+//create function which selects a random number from length of valid messages
+//this should probably be inside of router instead of here in utility
+const randomMove = () => {
+  const index = Math.random() * validMessages.length;
+  return validMessages[index];
+}
+
+//checks that valid is within valid message list
 const isValidMessage = (message) => {
   return _.contains(validMessages, message);
 };
@@ -36,12 +44,14 @@ module.exports.initialize = (callback) => {
     }
 
     // check to see if the keypress itself is a valid message
+    //if arrow is pressed. process the message
     if (isValidMessage(key.name)) {
       callback(key.name);
       return; // don't do any more processing on this key
     }
-    
+
     // otherwise build up a message from individual characters
+    //other keys - letters -  are pressed
     if (key && (key.name === 'return' || key.name === 'enter')) {
       // on enter, process the message
       logKeypress('\n');
