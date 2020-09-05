@@ -25,7 +25,7 @@
     })
   }
 
-  setInterval(getMove, 2000);
+  // setInterval(getMove, 2000);
 
   // }
     // https://api.themoviedb.org/3/search/movie?api_key=1796227790470af120d4a51fd91002b2&language=en-US&query=tron&page=1&include_adult=false

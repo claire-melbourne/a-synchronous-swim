@@ -19,6 +19,7 @@ const SwimTeam = {
       })
       .addClass(`turn-${direction}`);
 
+
     // same direction as last time? -> if yes, move the swim-team
     if (SwimTeam.direction === direction) {
       SwimTeam.updateLoc(direction);

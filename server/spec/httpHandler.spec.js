@@ -24,15 +24,19 @@ describe('server responses', () => {
     done();
   });
 
-  xit('should respond to a GET request for a swim command', (done) => {
+  it('should respond to a GET request for a swim command', (done) => {
     // write your test here
     let {req, res} = server.mock('/', 'GET');
+    let commands = ['left', 'right', 'up', 'down'];
+    const queue = require('../js/messageQueue');
+    httpHandler.initialize(queue);
+    queue.enqueue('right');
 
-    httpHandler.router(req, res, randomMove());
+    httpHandler.router(req, res);
     expect(res._responseCode).to.equal(200);
     expect(res._ended).to.equal(true);
     //currently failing at line 35, expectation is to pass after writing functionality
-    // expect(res._data.toString()).not.to.be.empty;
+    expect(commands).to.contain(res._data.toString());
     done();
   });
 
