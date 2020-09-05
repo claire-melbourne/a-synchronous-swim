@@ -17,20 +17,33 @@ module.exports.initialize = (queue) => {
 //we will send the response back to the client from here as well
 //google writeHead and end for parameters and functionality
 
+
 module.exports.router = (req, res, next = ()=>{}) => {
   console.log('Serving request type ' + req.method + ' for url ' + req.url);
 
   //once we know req.url, add && req.url === 'something'
-  if (req.method === 'GET') {
-    //create random move
-    const validMessages = ['left', 'right', 'up', 'down'];
-    const index = Math.random() * validMessages.length;
-    const message = validMessages[index];
+  // if (req.method === 'GET') {
+  //   //create random move
+    // const validMessages = ['left', 'right', 'up', 'down'];
+    // const index = Math.random() * validMessages.length;
+    // const message = validMessages[index];
 
-    //send the random move along
-    res.writeHead(200, 'application/JSON');
-    res.end(JSONstringify(message);
+  //   //send the random move along
+  //   res.writeHead(200, 'application/JSON');
+  //   res.end(JSONstringify(message));
+  // }
+
+  if (req.method === 'GET' && req.url === '/') {
+    const validMessages = ['left', 'right', 'up', 'down'];
+    let index = Math.floor(Math.random() * validMessages.length);
+    let message = validMessages[index];
+    const hi = 'hello'
+    res.writeHead(200, {'Content-Type': 'text/html'});
+    res.end(message);
   }
+  //send the random move along
+  // res.writeHead(200, {'Content-Type': 'text/html'});
+  // res.end('hello');
   //write function which directs req.method GET to randomMove function
   //write an http response with result from randomMove
   next(); // invoke next() at the end of a request to help with testing!
