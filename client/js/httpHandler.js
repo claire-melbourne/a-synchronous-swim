@@ -1,7 +1,7 @@
 //const fs = require('fs');
 // const SwimTeam = require('./SwimTeam.js');
 
-//setInterval(function() {
+(function() {
 
   const serverUrl = 'http://127.0.0.1:3000';
 
@@ -19,13 +19,16 @@
       success: (data) =>{
         SwimTeam.move(data)
       },
+      complete: (data) => {
+        setTimeout(getMove, 100);
+      },
       error: (data) => {
         console.log('failed');
       }
     })
   }
 
-  // setInterval(getMove, 2000);
+  setTimeout(getMove, 0);
 
   // }
     // https://api.themoviedb.org/3/search/movie?api_key=1796227790470af120d4a51fd91002b2&language=en-US&query=tron&page=1&include_adult=false
@@ -85,5 +88,5 @@
     ajaxFileUplaod(file);
   });
 
-//}, 2000);
+}());
 
