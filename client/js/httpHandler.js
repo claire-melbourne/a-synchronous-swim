@@ -59,7 +59,7 @@
     $.ajax({
       type: 'POST',
       data: formData,
-      url: `http://127.0.0.1:3000`,
+      url: `http://127.0.0.1:3000/background.jpg`,
       cache: false,
       contentType: false,
       processData: false,

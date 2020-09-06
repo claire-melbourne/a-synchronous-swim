@@ -42,9 +42,25 @@ module.exports.router = (req, res, next = ()=>{}) => {
   }
 
   if (req.method === 'POST' && req.url === '/background.jpg') {
-    res.writeHead(201, headers);
-    res.end();
-    next();
+    var fileStorage = Buffer.alloc(0);
+    req.on('data', (chunk) => {
+      //Buffer concats differently from array.
+      fileStorage = Buffer.concat([fileStorage, chunk]);
+    })
+
+    req.on('end', () => {
+      var file = multipart.getFile(fileStorage);
+      fs.writeFile(module.exports.backgroundImageFile, file.data, (err, data) => {
+        if (err) {
+          res.writeHead(400, headers);
+          res.end();
+        } else {
+          res.writeHead(201, headers);
+          res.end();
+        }
+        next();
+      })
+    })
   }
 
   if (req.method === 'OPTIONS') {
@@ -54,4 +70,3 @@ module.exports.router = (req, res, next = ()=>{}) => {
   }
  // invoke next() at the end of a request to help with testing!
 };
-
