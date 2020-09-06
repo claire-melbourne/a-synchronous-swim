@@ -41,6 +41,12 @@ module.exports.router = (req, res, next = ()=>{}) => {
     }
   }
 
+  if (req.method === 'POST' && req.url === '/background.jpg') {
+    res.writeHead(201, headers);
+    res.end();
+    next();
+  }
+
   if (req.method === 'OPTIONS') {
     res.writeHead(200, headers);
     res.end();
